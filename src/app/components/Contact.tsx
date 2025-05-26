@@ -11,7 +11,7 @@ const Contact : React.FC<ContactProps> = ({name, contactNumber}) => {
     <div className=''> 
         <div className='flex'>
             <div className='flex items-center mb-2'>
-                <div className='p-3 m-1 bg-gray-200 border-white rounded-4xl'>
+                <div className='p-3 m-1 ml-2 bg-gray-200 border-white rounded-4xl'>
                     <HiUser className='text-white' />
                 </div>
                 

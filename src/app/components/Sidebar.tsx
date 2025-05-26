@@ -11,6 +11,7 @@ import { FaImage } from "react-icons/fa";
 import { MdChecklist } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { GiPeriscope } from "react-icons/gi";
+
 const Sidebar = () => {
   return (
     <div className='sidebar'>
@@ -27,6 +28,7 @@ const Sidebar = () => {
         <div className='sidebar-icons'><MdChecklist /></div>
         <div className='sidebar-icons'><IoIosSettings /></div>
     </div>
+
   )
 }
 
