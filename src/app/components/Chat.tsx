@@ -1,13 +1,13 @@
 import React from 'react'
-import bg from '../public/doodle.jpg'
+
 // import { useEffect } from 'react'
 
-interface ChatProps{
-    type : string,
-    members?: any,
+// interface ChatProps{
+//     type : string,
+//     members?: any,
 
-}
-const Chat = () => {
+// }
+const Chat  = () => {
   return (
     <div className="flex flex-col h-full">  {/* full height of parent */}
       <div className='h-12 bg-yellow-200'>

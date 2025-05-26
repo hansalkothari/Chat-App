@@ -68,7 +68,7 @@ export default function LoginForm() {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         </form>
         <div className="text-center text-sm text-gray-600 mt-4">
-        Don't have an account? <a href="/register" className="text-green-500 hover:underline">Sign up</a>
+         Don't have an account? {/* eslint-disable-line react/no-unescaped-entities */} <a href="/register" className="text-green-500 hover:underline">Sign up</a>
         </div>
     </div>
     </div>
