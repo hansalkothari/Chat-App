@@ -1,5 +1,4 @@
 import React from 'react'
-import LoginForm from './Login'
 import bg from '../public/doodle.jpg'
 // import { useEffect } from 'react'
 
@@ -15,9 +14,9 @@ const Chat = () => {
         {/* Header */}
       </div>
 
-      <div className="flex-1 bg-[url('/doodle.jpg')] bg-repeat overflow-auto">
+      <div className="flex-1 bg-[url('/doodle2-3.jpg')] bg-repeat overflow-auto">
         {/* Chat content fills remaining space */}
-        hello
+        
       </div>
 
       <div className='min-h-12 bg-gray-300'>
