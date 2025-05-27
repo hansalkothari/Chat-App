@@ -3,18 +3,21 @@ import { HiUser } from "react-icons/hi2";
 import { ImPhone } from "react-icons/im";
 
 interface ContactProps{
-    name: string,
-    contactNumber: string
+    id: string;                    
+    name: string;
+    contactNumber: string;
+    lastMessage?: string;           
+    timestamp?: string;             
+    isActive?: boolean;             
 }
-const Contact : React.FC<ContactProps> = ({name, contactNumber}) => {
+const Contact : React.FC<ContactProps> = ({name, contactNumber, isActive}) => {
   return (
-    <div className=''> 
+    <div className={`${isActive? 'bg-green-50': ''} min-w-[80px]`}> 
         <div className='flex'>
             <div className='flex items-center mb-2'>
                 <div className='p-3 m-1 ml-2 bg-gray-200 border-white rounded-4xl'>
                     <HiUser className='text-white' />
-                </div>
-                
+                </div>  
             </div>
             <div className='contact-details p-2 mb-2'>      
                     <p className='text-[0.9rem] font-bold'>{name}</p>
