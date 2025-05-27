@@ -22,15 +22,25 @@ export default function LoginForm() {
         if (error) {
           setError(error.message);
         } else {
-          console.log('Logged in:', data);
-    
-          // Optional: Save user data to localStorage
-          if (data.session) {
-            localStorage.setItem('user', JSON.stringify(data.session.user));
-          }
-    
-          // 🚀 Redirect to dashboard (or any other protected route)
-          router.push('/');
+            // Now we need the user's details to find exact user from the database and his contact list.
+            console.log('Logged in user:', data.session.user);
+            const userId = data.session.user.id;
+
+            // 2️⃣ Fetch profile from 'profiles' table
+            const { data: profile, error: profileError } = await supabase
+            .from('Profile')
+            .select('*')
+            .eq('id', userId)
+            .single();
+
+            if (profileError) {
+                setError('Profile not found: ' + profileError.message);
+                return;
+            }
+
+            console.log('User profile:', profile);
+            localStorage.setItem('userProfile', JSON.stringify(profile));
+            router.push('/');
         }
     };
 

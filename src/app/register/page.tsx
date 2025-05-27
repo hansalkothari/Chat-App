@@ -14,25 +14,40 @@ export default function RegisterPage() {
     const router = useRouter();
 
     const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-        setError('Passwords do not match');
-        return;
-    }
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
 
-    const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-    });
+        const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+        });
 
-    if (error) {
-        setError(error.message);
-        return;
-    }
+        if (error) {
+            setError(error.message);
+            return;
+        }
 
-    if (data.user) {
-        console.log('Registered user:', data.user);
-        router.push('/');
+        if (data.user) {
+            const user = data.user;
+            const { error: profileError } = await supabase.from('Profile').insert([
+              {
+                id: user.id,          
+                email: user.email,
+                username: email.split('@')[0], 
+                created_at: new Date().toISOString(),
+              }
+            ]);
+        
+            if (profileError) {
+              setError('Error creating user profile: ' + profileError.message);
+              return;
+            }
+
+            console.log('Registered user:', data.user);
+            router.push('/');
         }
         setError('');
     };
