@@ -11,7 +11,7 @@ import { IoIosList } from "react-icons/io";
 
 const Top = () => {
   return (
-    <div className="top flex items-center justify-between">
+    <nav className="top flex items-center justify-between">
       <div className="flex items-center ml-4">
         <BiSolidMessageSquareDots className="text text-gray-400" />
         <p className="text text-gray-400 ml-1"> chats</p>
@@ -25,7 +25,7 @@ const Top = () => {
         <div className="flex items-center m-2 border p-1 border-gray-200 rounded text-s"><IoMdNotificationsOff /></div>
         <div className="flex items-center m-2 border p-1 border-gray-200 rounded text-xs"><BsStars className="text-yellow-400"/><IoIosList /></div>
       </div>
-    </div>
+    </nav>
   );
 };
 

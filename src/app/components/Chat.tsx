@@ -100,7 +100,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
 
   return (
     <div className="flex flex-col h-full">
-      {/* Chat Header */}
+      
       <div className="h-14 flex items-center justify-between px-4 font-semibold border-b-1 border-gray-200">  
           <div className='flex items-center'>
             <div className='flex items-center m-1'>
@@ -121,7 +121,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
           </div>
       </div>
 
-      {/* Chat body */}
+      
       <div className="flex-1 bg-[url('/doodle.jpg')] bg-repeat overflow-auto p-4">
         {messages.map((m) => {
           const isMe = m.sender_id === userId;
@@ -137,7 +137,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
                     : 'bg-white text-gray-800 rounded-bl-none'
                 }`}
               >
-                <p className="whitespace-pre-wrap">{m.content}</p>
+                <p className="whitespace-pre-wrap  [overflow-wrap:anywhere]">{m.content}</p>
                 <span className="block text-xs mt-1 text-gray-600 text-right">
                   {new Date(m.created_at).toLocaleTimeString([], {
                     hour: '2-digit',
@@ -151,7 +151,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
         <div ref={bottomRef} />
       </div>
 
-      {/* footer of the chat section */}
+      
       <div className="min-h-12 flex items-center px-4 py-2">
         <input
           type="text"

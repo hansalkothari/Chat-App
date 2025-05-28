@@ -13,7 +13,7 @@ interface ContactProps{
 }
 const Contact : React.FC<ContactProps> = ({name, contactNumber, lastMessage, isActive}) => {
   return (
-    <div className={` cursor-pointer ${isActive? 'bg-gray-100': ''}`}> 
+    <article className={` cursor-pointer ${isActive? 'bg-gray-100': ''}`}> 
         <div className='flex'>
             <div className='flex items-center mb-2'>
                 <div className='p-4 m-1 ml-2 bg-gray-200 border-white rounded-4xl'>
@@ -22,7 +22,7 @@ const Contact : React.FC<ContactProps> = ({name, contactNumber, lastMessage, isA
             </div>
             <div className='contact-details p-2 mb-2 w-full'>      
                     <p className='text-[0.9rem] font-bold'>{name}</p>
-                    <span className='text-[0.9rem] text-gray-400'>{lastMessage}</span>
+                    <span className='text-[0.9rem] text-gray-400'>{lastMessage?.substring(0,50)}</span>
                     
                     <div className='flex items-center justify-between mt-1'>
                         <div className='flex items-center bg-gray-200 pl-2 pr-2 border border-gray-200 rounded-md'>
@@ -34,8 +34,7 @@ const Contact : React.FC<ContactProps> = ({name, contactNumber, lastMessage, isA
 
             </div>
         </div>
-        
-    </div>
+    </article>
   )
 }
 

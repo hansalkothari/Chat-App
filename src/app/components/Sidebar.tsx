@@ -15,7 +15,7 @@ import { GiStarsStack } from "react-icons/gi";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 const Sidebar = () => {
   return (
-    <div className='sidebar justify-between'>
+    <nav className='sidebar justify-between'>
       <div>
         <div className='sidebar-icons'><GiPeriscope className="text text-green-700"/></div>
         <div className='sidebar-icons'><IoMdHome /></div>
@@ -34,7 +34,7 @@ const Sidebar = () => {
         <div className='sidebar-icons'><GiStarsStack /></div>
         <div className='sidebar-icons'><RiLogoutBoxRFill /></div>
       </div>
-    </div>
+    </nav>
 
   )
 }
