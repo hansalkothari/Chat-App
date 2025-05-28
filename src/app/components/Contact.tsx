@@ -6,34 +6,37 @@ interface ContactProps{
     id: string;                    
     name: string;
     contactNumber: string;
+    lastMessagerName?: string;
     lastMessage?: string;           
     timestamp?: string;             
     isActive?: boolean;             
 }
-const Contact : React.FC<ContactProps> = ({name, contactNumber, isActive}) => {
+const Contact : React.FC<ContactProps> = ({name, contactNumber, lastMessage, isActive}) => {
   return (
-    <div className={`${isActive? 'bg-green-50': ''} min-w-[80px]`}> 
+    <div className={`${isActive? 'bg-green-50': ''}`}> 
         <div className='flex'>
             <div className='flex items-center mb-2'>
-                <div className='p-3 m-1 ml-2 bg-gray-200 border-white rounded-4xl'>
+                <div className='p-4 m-1 ml-2 bg-gray-200 border-white rounded-4xl'>
                     <HiUser className='text-white' />
                 </div>  
             </div>
-            <div className='contact-details p-2 mb-2'>      
+            <div className='contact-details p-2 mb-2 w-full'>      
                     <p className='text-[0.9rem] font-bold'>{name}</p>
-                    <p className='text-gray-400'> <span>last messagner :</span> <span>last message from the messa</span></p>
-                    <div className='flex justify-between'>
-                        <div className='flex items-center bg-gray-200'>
-                            <ImPhone className='text-[0.5rem]' />
-                            <p className='text-xs text-gray-500 ml-1'> {contactNumber}</p>
+                    {/* <span className='text-[0.6rem] text-gray-400'>{lastMessagerName ?? 'Unknown'}: </span> */}
+                    <span className='text-[0.9rem] text-gray-400'>{lastMessage}</span>
+                    
+                    <div className='flex items-center justify-between mt-1'>
+                        <div className='flex items-center bg-gray-200 pl-2 pr-2 border border-gray-200 rounded-md'>
+                            <ImPhone className='text-[0.5rem] text-gray-400' />
+                            <p className='text-[0.65rem] text-gray-400 ml-1'> {contactNumber}</p>
                         </div>                        
-                        <p className='text-xs'>22 May 2025</p>
+                        <p className='text-xs'>28-May-2025</p>
                     </div>
+
             </div>
         </div>
         
     </div>
-    
   )
 }
 

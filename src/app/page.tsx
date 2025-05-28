@@ -11,8 +11,10 @@ interface Profile {
   id: string;
   email: string;
   username: string;
+  phone_number: string;
   created_at: string;
   last_seen?: string | undefined | null;
+  lastMessage?: string;
 }
 
 interface ContactRow {
@@ -39,7 +41,7 @@ export default function Home() {
       if (user) {
         console.log('Current user UUID:', user.id);
 
-        // Fetch contact IDs
+        // 1️⃣ Fetch contact IDs
         const { data: contactRows, error: contactError } = await supabase
           .from('contacts')
           .select('contact_id')
@@ -60,7 +62,7 @@ export default function Home() {
           return;
         }
 
-        // Fetch profile details for contact IDs
+        // 2️⃣ Fetch profile details for contact IDs
         const { data: profiles, error: profileError } = await supabase
           .from('Profile')
           .select('*')
@@ -72,8 +74,41 @@ export default function Home() {
           return;
         }
 
+        // 3️⃣ For each contact, fetch the last message (latest by timestamp)
+        const enrichedContacts = await Promise.all(
+          (profiles as Profile[]).map(async (profile) => {
+            // 1️⃣ Get conversation_id between current user and profile
+            const { data: conversation, error: conversationError } = await supabase
+            .from('conversations')
+            .select('id')
+            .or(`and(user1_id.eq.${user.id},user2_id.eq.${profile.id}),and(user1_id.eq.${profile.id},user2_id.eq.${user.id})`)
+            .limit(1)
+            .single();
+
+            if (conversationError || !conversation) {
+              console.warn(`No conversation found for contact ${profile.id}`);
+              return { ...profile, lastMessage: 'No conversation yet.' };
+            }
+
+            const conversationId = conversation.id;
+
+            // 2️⃣ Fetch last message from messages table by conversation_id
+            const { data: messages, error: messageError } = await supabase
+              .from('messages')
+              .select('content, sender_id, created_at')
+              .eq('conversation_id', conversationId)
+              .order('created_at', { ascending: false })
+              .limit(1);
+
+            const lastMessage = messages?.[0]?.content || 'No message yet.';
+            return { ...profile, lastMessage }
+          })
+        );
+        
         console.log('Fetched contact profiles:', profiles);
-        setContacts(profiles as Profile[]);
+        
+        setContacts(enrichedContacts);
+        // setContacts(profiles as Profile[]);
       } else {
         console.log('No user is logged in.');
         setContacts([]);
@@ -81,9 +116,9 @@ export default function Home() {
 
       setLoading(false);
     }
-
     fetchContacts();
   },[])
+
 
   useEffect(()=>{
     if (!selected){
@@ -157,7 +192,7 @@ export default function Home() {
       // 2️⃣ Check if the user with the provided email exists
       const { data: profiles, error: profileError } = await supabase
         .from('Profile')
-        .select('id, email, username, created_at, last_seen')
+        .select('id, email, username, phone_number, created_at, last_seen')
         .eq('email', email)
         .limit(1);
   
@@ -213,7 +248,8 @@ export default function Home() {
                     <Contact
                       id={c.id}
                       name={c.username}
-                      contactNumber={c.email}
+                      contactNumber={c.phone_number}
+                      lastMessage={c.lastMessage}
                       isActive={c.id === selected?.id}
                     />
                 </div>
@@ -225,7 +261,7 @@ export default function Home() {
               )}
             </div>
             
-            <div className='absolute right-3 bottom-3 p-3 bg-green-600 w-fit rounded-4xl'>
+            <div onClick={handleAddContact} className='absolute right-3 bottom-3 p-3 bg-green-600 w-fit rounded-4xl'>
                 <TbMessageCirclePlus className="text-[1.2rem] text-white"/>
             </div>
           </div>
