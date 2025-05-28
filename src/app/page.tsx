@@ -9,6 +9,8 @@ import { RiFilter3Fill } from "react-icons/ri";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase-client";
+import { useRouter } from 'next/navigation';
+
 
 interface Profile {
   id: string;
@@ -30,15 +32,18 @@ export default function Home() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  const router = useRouter();
+
   useEffect(() => {
     async function fetchContacts() {
       const {
         data: { user },
         error: userError,
       } = await supabase.auth.getUser();
-      if (userError) {
-        console.error("Error fetching user:", userError.message);
+      if (userError || !user) {
+        console.error("Error fetching user:", userError?.message);
         setLoading(false);
+        router.push("/register"); 
         return;
       }
 

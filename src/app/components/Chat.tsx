@@ -122,7 +122,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
       </div>
 
       {/* Chat body */}
-      <div className="flex-1 bg-[url('/doodle2-3.jpg')] bg-repeat overflow-auto p-4">
+      <div className="flex-1 bg-[url('/doodle.jpg')] bg-repeat overflow-auto p-4">
         {messages.map((m) => {
           const isMe = m.sender_id === userId;
           return (
