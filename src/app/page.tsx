@@ -117,6 +117,9 @@ export default function Home() {
               .order("created_at", { ascending: false })
               .limit(1);
 
+            if (messageError) {
+              console.error(`Error fetching messages for contact ${profile.id}:`, messageError);
+            }
             const lastMessage = messages?.[0]?.content || "No message yet.";
             return { ...profile, lastMessage };
           })
