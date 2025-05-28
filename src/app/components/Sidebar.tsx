@@ -11,10 +11,12 @@ import { FaImage } from "react-icons/fa";
 import { MdChecklist } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { GiPeriscope } from "react-icons/gi";
-
+import { GiStarsStack } from "react-icons/gi";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 const Sidebar = () => {
   return (
-    <div className='sidebar'>
+    <div className='sidebar justify-between'>
+      <div>
         <div className='sidebar-icons'><GiPeriscope className="text text-green-700"/></div>
         <div className='sidebar-icons'><IoMdHome /></div>
         <div className='sidebar-icons'><BiSolidMessageSquareDots className="text text-green-700" /></div>
@@ -27,6 +29,11 @@ const Sidebar = () => {
         <div className='sidebar-icons'><FaImage /></div>
         <div className='sidebar-icons'><MdChecklist /></div>
         <div className='sidebar-icons'><IoIosSettings /></div>
+      </div>
+      <div>
+        <div className='sidebar-icons'><GiStarsStack /></div>
+        <div className='sidebar-icons'><RiLogoutBoxRFill /></div>
+      </div>
     </div>
 
   )

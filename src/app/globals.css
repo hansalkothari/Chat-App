@@ -47,6 +47,7 @@ body {
     @apply flex flex-col w-fit min-h-screen border-r-1 border-gray-200 overflow-y-auto max-h-screen
   }
 
+
 }
 
 .chat-content{

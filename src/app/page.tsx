@@ -269,11 +269,6 @@ export default function Home() {
                 <p className="text-green-700 font-bold text-[0.9rem] m-2">
                   Custom Filter
                 </p>
-
-                {/* <div className="bg-white pl-2 pr-2 mr-6 border-1 border-gray-200 rounded-sm">
-                  <p className="text-sm">Save</p>
-                </div> */}
-
                 <div className="flex items-center flex-1 bg-white pl-2 pr-2 border-1 border-gray-200 rounded-sm ">
                   <HiMiniMagnifyingGlass className="font-black" />
                   <input
@@ -339,7 +334,7 @@ export default function Home() {
 
             <div
               onClick={handleAddContact}
-              className="absolute right-3 bottom-3 p-3 bg-green-600 w-fit rounded-4xl"
+              className="absolute right-3 bottom-3 p-3 bg-green-600 w-fit rounded-4xl cursor-pointer"
             >
               <TbMessageCirclePlus className="text-[1.2rem] text-white" />
             </div>
