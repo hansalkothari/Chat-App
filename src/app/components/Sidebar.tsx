@@ -15,9 +15,9 @@ import { GiPeriscope } from "react-icons/gi";
 const Sidebar = () => {
   return (
     <div className='sidebar'>
-        <div className='sidebar-icons'><GiPeriscope className="text text-green-400"/></div>
+        <div className='sidebar-icons'><GiPeriscope className="text text-green-700"/></div>
         <div className='sidebar-icons'><IoMdHome /></div>
-        <div className='sidebar-icons'><BiSolidMessageSquareDots className="text text-green-400" /></div>
+        <div className='sidebar-icons'><BiSolidMessageSquareDots className="text text-green-700" /></div>
         <div className='sidebar-icons'><IoTicketSharp /></div>
         <div className='sidebar-icons'><BiLineChart /></div>
         <div className='sidebar-icons'><IoIosList /></div>
