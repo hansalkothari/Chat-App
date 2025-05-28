@@ -8,6 +8,7 @@ export default function RegisterPage() {
 
     
     const [email, setEmail] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
@@ -36,6 +37,7 @@ export default function RegisterPage() {
               {
                 id: user.id,          
                 email: user.email,
+                phone_number:phoneNumber,
                 username: email.split('@')[0], 
                 created_at: new Date().toISOString(),
               }
@@ -69,6 +71,14 @@ export default function RegisterPage() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            required
+            />
+            <input
+            type="text"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500"
             required
             />

@@ -140,15 +140,69 @@ export default function Home() {
 
   },[selected])
 
+
+  async function handleAddContact() {
+    const email = prompt("Enter the email of the contact you want to add:");
+    if (!email) return;
+  
+    try {
+      // 1️⃣ Get the current user
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError || !user) {
+        console.error('Error fetching current user:', userError);
+        alert('You must be logged in to add a contact.');
+        return;
+      }
+  
+      // 2️⃣ Check if the user with the provided email exists
+      const { data: profiles, error: profileError } = await supabase
+        .from('Profile')
+        .select('id, email, username, created_at, last_seen')
+        .eq('email', email)
+        .limit(1);
+  
+      if (profileError) {
+        console.error('Error fetching profile:', profileError);
+        alert('Error fetching contact profile.');
+        return;
+      }
+  
+      if (!profiles || profiles.length === 0) {
+        alert('No user found with this email.');
+        return;
+      }
+  
+      const contactProfile = profiles[0];
+  
+      // 3️⃣ Insert the contact into the 'contacts' table
+      const { error: insertError } = await supabase
+        .from('contacts')
+        .insert({ user_id: user.id, contact_id: contactProfile.id });
+  
+      if (insertError) {
+        console.error('Error adding contact:', insertError);
+        alert('Failed to add contact.');
+        return;
+      }
+  
+      // 4️⃣ Update the contacts list in state
+      setContacts(prev => [...prev, contactProfile]);
+      alert(`Successfully added ${contactProfile.username} as a contact!`);
+    } catch (err) {
+      console.error('Unexpected error adding contact:', err);
+      alert('Something went wrong.');
+    }
+  }
+  
   return (
     <div className="flex sticky top-0 left-0 right-0 bottom-0">
       <Sidebar />
       <div className="flex flex-col w-full flex-1">
         <Top />
+
         <div className="flex flex-1">
           <div className="w-fit relative ">
-            
-            <div style={{ maxHeight: 'calc(100vh - 40px)' }} className="flex flex-col w-fit border-r-1 border-gray-200 overflow-y-auto h-full">
+            <div style={{ maxHeight: 'calc(100vh - 40px)' }} className="flex flex-col w-fit min-w-[400px] border-r-1 border-gray-200 overflow-y-auto h-full">
               {loading ? (
                 <div className="flex justify-center items-center w-full h-full p-10">
                   <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
@@ -165,7 +219,9 @@ export default function Home() {
                 </div>
                 ))
               ) : (
-                <p>No contacts found.</p>
+                <div className="flex justify-center items-center w-full h-full p-10">
+                  <p className="text-gray-500 text-lg italic">No contacts found.</p>
+                </div>
               )}
             </div>
             
@@ -194,6 +250,7 @@ export default function Home() {
               </div>
             )}
         </div>
+
         </div>      
       </div>    
     </div>

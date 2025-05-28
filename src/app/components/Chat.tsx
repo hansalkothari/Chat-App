@@ -156,7 +156,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
         <input
           type="text"
           className="flex-1 rounded-full px-4 py-2 mr-2 focus:outline-none"
-          placeholder="Type a message"
+          placeholder="Message..."
           value={body}
           onChange={(e) => setBody(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && send()}
@@ -166,7 +166,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
           className="p-2 rounded-full text-green-600 disabled:opacity-50"
           disabled={!body.trim()}
         >
-          <IoMdSend className='text-2xl' />
+          <IoMdSend className='text-2xl text-green-800' />
         </button>
       </div>
       <div className='h-12 flex items-center justify-between'>
@@ -180,7 +180,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
         </div>
         <div className='flex mr-8 p-1 pl-2 items-center border-1 border-gray-200 rounded-xs'>
           <div className='bg-green-600 pt-1 pr-1 rounded-4xl mr-1'><GiPeriscope className='text-white'/></div>
-          <p className='mr-20'>Periskope</p>
+          <p className='mr-20 text-[0.9rem]'>Periskope</p>
           <RiExpandUpDownLine className='text-gray-400'/>
         </div>
       </div>
