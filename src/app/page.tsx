@@ -256,13 +256,13 @@ export default function Home() {
   );
 
   return (
-    <div className="flex sticky top-0 left-0 right-0 bottom-0">
+    <main className="flex sticky top-0 left-0 right-0 bottom-0">
       <Sidebar />
-      <div className="flex flex-col w-full flex-1">
+      <section className="flex flex-col w-full flex-1">
         <Top />
 
         <div className="flex flex-1">
-          <div className="w-fit relative ">
+          <section className="w-fit relative ">
             <div
               style={{ maxHeight: "calc(100vh - 40px)" }}
               className="flex flex-col w-fit min-w-[400px] border-r-1 border-gray-200 overflow-y-auto h-full"
@@ -341,9 +341,9 @@ export default function Home() {
             >
               <TbMessageCirclePlus className="text-[1.2rem] text-white" />
             </div>
-          </div>
+          </section>
 
-          <div className="flex-1 flex flex-col">
+          <section className="flex-1 flex flex-col">
             {selected && conversationId ? (
               <Chat
                 conversationId={conversationId}
@@ -366,9 +366,9 @@ export default function Home() {
                 </p>
               </div>
             )}
-          </div>
+          </section>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
