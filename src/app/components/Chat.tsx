@@ -163,7 +163,7 @@ export default function Chat({ conversationId, contact }: ChatProps) {
         />
         <button
           onClick={send}
-          className="p-2 rounded-full text-green-600 disabled:opacity-50"
+          className="p-2 rounded-full text-green-600 disabled:opacity-50 cursor-pointer"
           disabled={!body.trim()}
         >
           <IoMdSend className='text-2xl text-green-800' />
